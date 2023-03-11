@@ -1,29 +1,6 @@
 {
   "enquiry": [
     {
-      "firstName": "Royal",
-      "lastName": "Thapa",
-      "email": "9876543210",
-      "mobile": "",
-      "weight": 50,
-      "height": 1.6,
-      "bmi": 19.531249999999996,
-      "bmiResult": "Normal",
-      "gender": "Male",
-      "requireTrainer": "yes",
-      "package": "Yearly",
-      "important": [
-        "Toxic fat reduction",
-        "Energy and Endurance",
-        "Building lean muscle",
-        "Healthier Digestive Function",
-        "Fitness"
-      ],
-      "haveBeforeGym": "No",
-      "enquiryDate": "2023-03-10T18:15:00.000Z",
-      "id": 1
-    },
-    {
       "firstName": "royal",
       "lastName": "tha",
       "email": "kn",
@@ -36,7 +13,7 @@
       "requireTrainer": "",
       "package": "",
       "important": "",
-      "haveBeforeGym": "",
+      "haveGymBefore": "",
       "enquiryDate": "",
       "id": 2
     }

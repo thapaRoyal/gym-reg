@@ -1,7 +1,9 @@
 import { ApiService } from './../services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-create-registration',
@@ -21,7 +23,10 @@ export class CreateRegistrationComponent implements OnInit {
 
   public registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private api: ApiService, private toastService: NgToastService) {}
+  public userIdToUpdate!:number;
+  public isUpdateActive:boolean = false;
+
+  constructor(private fb: FormBuilder, private router: Router, private api: ApiService, private activatedRoute: ActivatedRoute , private toastService: NgToastService) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       firstName: [''],
@@ -36,12 +41,20 @@ export class CreateRegistrationComponent implements OnInit {
       requireTrainer: [''],
       package: [''],
       important: [''],
-      haveBeforeGym: [''],
+      haveGymBefore: [''],
       enquiryDate: [''],
     });
 
     this.registerForm.controls['height'].valueChanges.subscribe(res  => {
       this.calculateBmi(res);
+    })
+
+    this.activatedRoute.params.subscribe(val => {
+      this.userIdToUpdate = val['id'];
+      this.api.getRegisteredUserId(this.userIdToUpdate).subscribe(res =>{
+        this.isUpdateActive = true;
+        this.fillFormToUpdate(res);
+      })
     })
   }
 
@@ -50,6 +63,16 @@ export class CreateRegistrationComponent implements OnInit {
       res => {
         this.toastService.success({detail: "Success", summary:"Enquiry Added", duration: 3000});
         this.registerForm.reset();
+      }
+    )
+  }
+
+  update(){
+    this.api.updateRegisterUser(this.registerForm.value, this.userIdToUpdate).subscribe(
+      res => {
+        this.toastService.success({detail: "Success", summary:"Enquiry Updated", duration: 3000});
+        this.registerForm.reset();
+        this.router.navigate(['list'])
       }
     )
   }
@@ -74,5 +97,26 @@ export class CreateRegistrationComponent implements OnInit {
         this.registerForm.controls['bmiResult'].patchValue('Obese');
         break;
     }
+  }
+
+  fillFormToUpdate(user: User){
+    this.registerForm.setValue(
+      {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        mobile: user.mobile,
+        weight: user.weight,
+        height: user.height,
+        bmi: user.bmi,
+        bmiResult: user.bmiResult,
+        gender: user.gender,
+        requireTrainer: user.requireTrainer,
+        package: user.package,
+        important: user.important,
+        haveGymBefore: user.haveGymBefore,
+        enquiryDate: user.enquiryDate, 
+      }
+    )
   }
 }

@@ -117,7 +117,7 @@
       </div>
       <div class="col-md-6">
         <label id="example-radio-group-label">Have you been in gym before?</label>
-        <mat-radio-group class="example-radio-group" formControlName="haveBeforeGym">
+        <mat-radio-group class="example-radio-group" formControlName="haveGymBefore">
           <mat-radio-button
             class="example-radio-button"
             *ngFor="let beenGym of ['Yes', 'No']"
@@ -139,6 +139,7 @@
           
       </div>
     </div>
-    <button (click)="submit()" class="mt-4" mat-raised-button color="accent">Submit</button>
+    <button *ngIf="!isUpdateActive" (click)="submit()" class="mt-4" mat-raised-button color="accent">Submit</button>
+    <button *ngIf="isUpdateActive" (click)="update()" class="mt-4" mat-raised-button color="accent">Update</button>
   </form>
 </div>

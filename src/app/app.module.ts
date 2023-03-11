@@ -21,6 +21,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatNativeDateModule} from '@angular/material/core'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort'; 
 
 @NgModule({
   declarations: [
@@ -39,7 +42,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgConfirmModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule,MatFormFieldModule,MatInputModule,MatRadioModule,MatSelectModule,MatDatepickerModule, MatNativeDateModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

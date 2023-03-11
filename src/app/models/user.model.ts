@@ -11,7 +11,7 @@ export class User{
     requireTrainer!:string;
     package!:string;
     important!:string[];
-    haveGymBBefore!:string;
+    haveGymBefore!:string;
     enquiryDate!:string;
     id!:number;
 }
